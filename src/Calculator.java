@@ -7,7 +7,7 @@ public class Calculator extends JFrame implements ActionListener {
 
     JFrame frame = new JFrame("Calculator V1");
 
-    JTextField textField = new JTextField(9);
+    JTextField textField = new JTextField(6);
     Font font = textField.getFont().deriveFont(Font.PLAIN, 50f);
     Font font2 = textField.getFont().deriveFont(Font.PLAIN, 20f);
 
@@ -35,6 +35,10 @@ public class Calculator extends JFrame implements ActionListener {
     JButton neg = new JButton("+/-");
     JButton sqr = new JButton("x^2");
     JButton div = new JButton("/");
+
+    double mem1 = 0;
+    char operation = ' ';
+    double result = 0;
 
     public void Start() {
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -72,6 +76,7 @@ public class Calculator extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == clr) {
             textField.setText("");
+            mem1 = 0;
         }
         if (e.getSource() == del) {
             String text = textField.getText();
@@ -79,12 +84,59 @@ public class Calculator extends JFrame implements ActionListener {
                 textField.setText(text.substring(0, text.length() - 1));
             }
         }
-
+        if (e.getSource() == sub) {
+            operation = '-';
+            mem1 = Double.parseDouble(textField.getText());
+            textField.setText("");
+        }
+        if (e.getSource() == mul){
+            operation = '*';
+            mem1 = Double.parseDouble(textField.getText());
+            textField.setText("");
+        }
         if (e.getSource() == dot) {
             String text = textField.getText();
             if (!text.contains(".")) {
                 textField.setText(text + ".");
             }
+        }
+        if (e.getSource() == neg) {
+            double number = Double.parseDouble(textField.getText());
+            textField.setText(String.valueOf(number * -1));
+        }
+        if (e.getSource() == sqr) {
+            double number = Double.parseDouble(textField.getText());
+            textField.setText(String.valueOf(number * number));
+        }
+
+        if (e.getSource() == div) {
+            mem1 = Double.parseDouble(textField.getText());
+            textField.setText("");
+            operation = '/';
+        }
+        if (e.getSource() == sum) {
+            mem1 += Double.parseDouble(textField.getText());
+            textField.setText("");
+            operation = '+';
+        }
+        if (e.getSource() == eql) {
+            if (operation == '/'){
+                result = mem1 / Double.parseDouble(textField.getText());
+                textField.setText(String.valueOf(result));
+            }
+            if (operation == '+') {
+                result = mem1 + Double.parseDouble(textField.getText());
+                textField.setText(String.valueOf(result));
+            }
+            if (operation == '-') {
+                result = mem1 - Double.parseDouble(textField.getText());
+                textField.setText(String.valueOf(result));
+            }
+            if (operation == '*') {
+                result = mem1 * Double.parseDouble(textField.getText());
+                textField.setText(String.valueOf(result));
+            }
+            mem1 = 0;
         }
 
         if (e.getSource() == num1) {
@@ -93,5 +145,30 @@ public class Calculator extends JFrame implements ActionListener {
         if (e.getSource() == num2) {
                 textField.setText(textField.getText() + "2");
         }
+        if (e.getSource() == num3) {
+                textField.setText(textField.getText() + "3");
+        }
+        if (e.getSource() == num4) {
+                textField.setText(textField.getText() + "4");
+        }
+        if (e.getSource() == num5) {
+                textField.setText(textField.getText() + "5");
+        }
+        if (e.getSource() == num6) {
+                textField.setText(textField.getText() + "6");
+        }
+        if (e.getSource() == num7) {
+                textField.setText(textField.getText() + "7");
+        }
+        if (e.getSource() == num8) {
+                textField.setText(textField.getText() + "8");
+        }
+        if (e.getSource() == num9) {
+                textField.setText(textField.getText() + "9");
+        }
+        if (e.getSource() == num0) {
+                textField.setText(textField.getText() + "0");
+        }
     }
 }
+
